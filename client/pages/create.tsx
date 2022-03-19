@@ -1,6 +1,11 @@
 import router from "next/router";
 import React, { useState } from "react";
 
+type Inputs = {
+  sessionType: "gi" | "no gi";
+  entry: string;
+};
+
 export default function Create() {
   const [form, setForm] = useState({
     name: "",
