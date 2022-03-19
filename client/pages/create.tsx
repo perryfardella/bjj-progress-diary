@@ -33,7 +33,6 @@ export default function Create() {
           user: "pez",
         },
       }),
-      //  JSON.stringify(newPerson),
     }).catch((error) => {
       window.alert(error);
       return;
