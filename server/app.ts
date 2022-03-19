@@ -35,7 +35,7 @@ class App {
   }
 
   private routes(): void {
-    this.express.get("/api/entrys", (req, res) => {
+    this.express.get("/api/entries", (req, res) => {
       this.entryController.getEntries().then((data) => res.json(data));
     });
 

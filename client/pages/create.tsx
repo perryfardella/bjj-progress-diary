@@ -22,13 +22,13 @@ export default function Create() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPerson = { ...form };
 
-    await fetch("http://localhost:3081/api/task", {
+    await fetch("http://localhost:3081/api/entry", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        task: {
+        entry: {
           entry: "this is an entry",
           user: "pez",
         },
