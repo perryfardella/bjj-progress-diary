@@ -29,7 +29,8 @@ export default function Create() {
       },
       body: JSON.stringify({
         task: {
-          task: "Unknown Type: [object Object]",
+          entry: "this is an entry",
+          user: "pez",
         },
       }),
       //  JSON.stringify(newPerson),

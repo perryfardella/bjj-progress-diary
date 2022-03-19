@@ -21,4 +21,4 @@ const TaskSchema: Schema = new Schema({
   user: { type: String, required: false },
 });
 
-export const TaskModel: Model<IEntry> = model<IEntry>("todos", TaskSchema);
+export const TaskModel: Model<IEntry> = model<IEntry>("entries", TaskSchema);
