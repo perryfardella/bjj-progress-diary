@@ -20,7 +20,7 @@ export default function Create() {
     e.preventDefault();
 
     // When a post request is sent to the create url, we'll add a new record to the database.
-    const newPerson = { ...form };
+    const newEntry = { ...form };
 
     await fetch("http://localhost:3081/api/entry", {
       method: "POST",
@@ -33,6 +33,8 @@ export default function Create() {
           user: "pez",
         },
       }),
+      // To do: replace placeholder hardcoded body with formData
+      // JSON.stringify(newEntry)
     }).catch((error) => {
       window.alert(error);
       return;
