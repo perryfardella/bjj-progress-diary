@@ -1,5 +1,4 @@
-import router from "next/router";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 
 export default function Edit() {
@@ -9,13 +8,14 @@ export default function Edit() {
     level: "",
     records: [],
   });
-  const params = useParams();
+  //   const params = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
-      const id = params.id.toString();
+      const id = router.query.toString();
       const response = await fetch(
-        `http://localhost:5000/record/${params.id.toString()}`
+        `http://localhost:5000/record/${router.query.toString()}`
       );
 
       if (!response.ok) {
@@ -37,7 +37,7 @@ export default function Edit() {
     fetchData();
 
     return;
-  }, [params.id]);
+  }, [router]);
 
   // These methods will update the state properties.
   function updateForm(value: any) {
@@ -55,7 +55,7 @@ export default function Edit() {
     };
 
     // This will send a post request to update the data in the database.
-    await fetch(`http://localhost:5000/update/${params.id}`, {
+    await fetch(`http://localhost:5000/update/${router.query}`, {
       method: "POST",
       body: JSON.stringify(editedPerson),
       headers: {
