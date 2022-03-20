@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 
 const Record = (props: any) => (
   <tr>
-    <td>{props.record.name}</td>
-    <td>{props.record.position}</td>
-    <td>{props.record.level}</td>
+    <td>{props.record.user}</td>
+    <td>{props.record.sessionType}</td>
+    <td>{props.record.entry}</td>
     <td>
       <Link href={`/edit/${props.record._id}`}>
         <a className="btn btn-link">Edit</a>
@@ -29,7 +29,7 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5000/record/`);
+      const response = await fetch(`http://localhost:3081/api/entries`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -48,7 +48,7 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id: any) {
-    await fetch(`http://localhost:5000/${id}`, {
+    await fetch(`http://localhost:3081/api/entry/${id}`, {
       method: "DELETE",
     });
 
@@ -76,9 +76,9 @@ export default function RecordList() {
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Position</th>
-            <th>Level</th>
+            <th>User</th>
+            <th>SessionType</th>
+            <th>Entry</th>
             <th>Action</th>
           </tr>
         </thead>

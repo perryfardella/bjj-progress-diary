@@ -19,11 +19,12 @@ const Create = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...data, user: "skrt" }),
+      body: JSON.stringify({ entry: { ...data, user: "skrt" } }),
     }).catch((error) => {
       window.alert(error);
       return;
     });
+    router.push("/");
   };
 
   return (
@@ -40,7 +41,7 @@ const Create = () => {
       {/* errors will return when field validation fails  */}
       {errors.entry && <span>This field is required</span>}
 
-      <input type="submit" />
+      <input type="submit" value="Submit entry" />
     </form>
 
     // <div>

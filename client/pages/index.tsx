@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import Navbar from "./navbar";
+import RecordList from "../components/recordList";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Navbar />
+      <RecordList />
     </div>
   );
 };
