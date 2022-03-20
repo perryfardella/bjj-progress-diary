@@ -11,7 +11,6 @@ const Create = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -31,7 +30,10 @@ const Create = () => {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
-      <input type="radio" defaultValue="gi" {...register("sessionType")} />
+      <select {...register("sessionType")}>
+        <option value="gi">gi</option>
+        <option value="no gi">no gi</option>
+      </select>
 
       {/* include validation with required or other standard HTML validation rules */}
       <input {...register("entry", { required: true })} />
