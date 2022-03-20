@@ -1,11 +1,26 @@
+import { StaticDatePicker } from "@mui/lab";
+import { TextField } from "@mui/material";
 import type { NextPage } from "next";
+import React from "react";
 import RecordList from "../components/recordList";
 
 const Home: NextPage = () => {
+  const [value, setValue] = React.useState<Date | null>(new Date());
+
   return (
     <div>
       {/* need to pass date props to this component I think */}
       <RecordList />
+      <StaticDatePicker<Date>
+        orientation="landscape"
+        openTo="day"
+        value={value}
+        // shouldDisableDate={isWeekend}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
     </div>
   );
 };
