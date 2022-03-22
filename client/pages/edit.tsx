@@ -7,7 +7,11 @@ type Inputs = {
   entry: string;
 };
 
-const Edit = () => {
+interface EditProps {
+  entryId: string;
+}
+
+const Edit: React.FC<EditProps> = ({ entryId }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +23,7 @@ const Edit = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ entry: { ...data, user: "skrt" } }),
+      body: JSON.stringify({ entry: { ...data, user: "skrt", _id: entryId } }),
     }).catch((error) => {
       window.alert(error);
       return;
