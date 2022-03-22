@@ -23,7 +23,7 @@ const Edit: React.FC<EditProps> = ({ entryId }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ entry: { ...data, user: "skrt", _id: entryId } }),
+      body: JSON.stringify({ entry: { ...data, user: "skrt", id: entryId } }),
     }).catch((error) => {
       window.alert(error);
       return;

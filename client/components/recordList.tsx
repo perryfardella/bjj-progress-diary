@@ -7,10 +7,8 @@ const Record = (props: any) => (
     <td>{props.record.sessionType}</td>
     <td>{props.record.entry}</td>
     <td>
-      <Link href={`/edit/${props.record._id}`}>
-        <a className="btn btn-link">Edit</a>
-      </Link>{" "}
-      |
+      {/* On click - pass the id of the entry up to our index page so we can display teh correct edit dialog */}
+      <button className="btn btn-link">Edit</button>|
       <button
         className="btn btn-link"
         onClick={() => {

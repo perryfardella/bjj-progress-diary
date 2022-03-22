@@ -7,6 +7,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import isWeekend from "date-fns/isWeekend";
 import Dialog from "@mui/material/Dialog";
 import Create from "../components/create";
+import Edit from "../components/edit";
 
 const Home: NextPage = () => {
   const [value, setValue] = React.useState<Date | null>(new Date());
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
+      {/* Need to pass a function here as props that will allow us to retrieve the id of the entry to be edited */}
       <RecordList />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker<Date>
@@ -38,8 +40,20 @@ const Home: NextPage = () => {
         <Create />
       </Dialog>
 
+      <Dialog
+        onClose={() => setcreateDialogIsOpen(false)}
+        open={createDialogIsOpen}
+      >
+        {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
+        <Edit entryId="6239d0b08548d149188270ef" />
+      </Dialog>
+
       <button onClick={() => setcreateDialogIsOpen(true)}>
         create new record
+      </button>
+
+      <button onClick={() => setcreateDialogIsOpen(true)}>
+        sample edit record
       </button>
     </div>
   );
