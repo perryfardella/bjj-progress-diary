@@ -1,5 +1,5 @@
 import router from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
@@ -24,7 +24,6 @@ const Create = () => {
       window.alert(error);
       return;
     });
-    router.push("/");
   };
 
   return (
