@@ -11,10 +11,17 @@ import Edit from "../components/edit";
 
 const Home: NextPage = () => {
   const [value, setValue] = React.useState<Date | null>(new Date());
-  const [createDialogIsOpen, setcreateDialogIsOpen] =
+
+  // Hook to keep track of the create dialog status
+  const [createDialogIsOpen, setCreateDialogIsOpen] =
     React.useState<boolean>(false);
-  const [editDialogIsOpen, seteditDialogIsOpen] =
+
+  // Hook to keep track of the edit dialog status
+  const [editDialogIsOpen, setEditDialogIsOpen] =
     React.useState<boolean>(false);
+
+  // Hook to keep track of the currently selected date
+  const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
 
   return (
     <div>
@@ -32,8 +39,9 @@ const Home: NextPage = () => {
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
+
       <Dialog
-        onClose={() => setcreateDialogIsOpen(false)}
+        onClose={() => setCreateDialogIsOpen(false)}
         open={createDialogIsOpen}
       >
         {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
@@ -41,18 +49,18 @@ const Home: NextPage = () => {
       </Dialog>
 
       <Dialog
-        onClose={() => setcreateDialogIsOpen(false)}
-        open={createDialogIsOpen}
+        onClose={() => setEditDialogIsOpen(false)}
+        open={editDialogIsOpen}
       >
         {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
         <Edit entryId="6239d0b08548d149188270ef" />
       </Dialog>
 
-      <button onClick={() => setcreateDialogIsOpen(true)}>
+      <button onClick={() => setCreateDialogIsOpen(true)}>
         create new record
       </button>
 
-      <button onClick={() => setcreateDialogIsOpen(true)}>
+      <button onClick={() => setEditDialogIsOpen(true)}>
         sample edit record
       </button>
     </div>
