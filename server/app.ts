@@ -4,6 +4,13 @@ import { APILogger } from "./logger/api.logger";
 import { EntryController } from "./controller/entry.controller";
 import swaggerUi = require("swagger-ui-express");
 import fs = require("fs");
+import * as cors from "cors";
+
+const allowedOrigins = ["http://localhost:3000"];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
 
 class App {
   public express: express.Application;
@@ -32,6 +39,7 @@ class App {
   private middleware(): void {
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use(cors(options));
   }
 
   private routes(): void {
