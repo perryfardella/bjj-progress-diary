@@ -2,7 +2,7 @@ import { LocalizationProvider, StaticDatePicker } from "@mui/lab";
 import { TextField } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
-import RecordList from "../components/recordList";
+import RecordList from "../components/entryList";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import isWeekend from "date-fns/isWeekend";
 import Dialog from "@mui/material/Dialog";
@@ -10,8 +10,6 @@ import Create from "../components/create";
 import Edit from "../components/edit";
 
 const Home: NextPage = () => {
-  const [value, setValue] = React.useState<Date | null>(new Date());
-
   // Hook to keep track of the create dialog status
   const [createDialogIsOpen, setCreateDialogIsOpen] =
     React.useState<boolean>(false);
@@ -21,20 +19,22 @@ const Home: NextPage = () => {
     React.useState<boolean>(false);
 
   // Hook to keep track of the currently selected date
-  const [selectedDate, setSelectedDate] = React.useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+    new Date()
+  );
 
   return (
     <div>
       {/* Need to pass a function here as props that will allow us to retrieve the id of the entry to be edited */}
-      <RecordList />
+      <RecordList selectedDate={selectedDate} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker<Date>
           // orientation="landscape"
           openTo="day"
-          value={value}
+          value={selectedDate}
           // shouldDisableDate={isWeekend}
-          onChange={(newValue) => {
-            setValue(newValue);
+          onChange={(newDate) => {
+            setSelectedDate(newDate);
           }}
           renderInput={(params) => <TextField {...params} />}
         />
