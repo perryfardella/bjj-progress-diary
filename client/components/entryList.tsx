@@ -50,12 +50,12 @@ const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
   }, [entries.length]);
 
   // This method will delete a entry
-  async function deleteEntry(id: any) {
+  async function deleteEntry(id: string) {
     await fetch(`http://localhost:3081/api/entry/${id}`, {
       method: "DELETE",
     });
 
-    const newEntries = entries.filter((el: any) => el._id !== id);
+    const newEntries = entries.filter((el: Entry) => el._id !== id);
     setEntries(newEntries);
   }
 
@@ -63,17 +63,21 @@ const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
   const entryList = () => {
     return entries.map((entry: Entry) => {
       console.log("selected date is: " + selectedDate);
-      console.log(entry);
+      console.log("entry is: " + JSON.stringify(entry));
+      console.log("entry date after ISO convert:" + new Date(entry.entryDate));
+
+      // Convert ISO Date string to a Date object
+      const entryDate = new Date(entry.entryDate);
       if (
-        entry.entryDate.getDate() === selectedDate?.getDate() &&
-        entry.entryDate.getMonth() === selectedDate?.getMonth() &&
-        entry.entryDate.getFullYear() === selectedDate?.getFullYear()
+        entryDate.getDate() === selectedDate?.getDate() &&
+        entryDate.getMonth() === selectedDate?.getMonth() &&
+        entryDate.getFullYear() === selectedDate?.getFullYear()
       ) {
         return (
           <Entry
             entry={entry}
-            deleteEntry={() => deleteEntry(entry.id)}
-            key={entry.id}
+            deleteEntry={() => deleteEntry(entry._id)}
+            key={entry._id}
           />
         );
       }

@@ -11,7 +11,7 @@ type Inputs = {
   entryDate: Date;
 };
 
-const CreateEntry: React.FC<createEntryProps> = (selectedDate) => {
+const CreateEntry: React.FC<createEntryProps> = ({ selectedDate }) => {
   const {
     register,
     handleSubmit,
@@ -24,7 +24,11 @@ const CreateEntry: React.FC<createEntryProps> = (selectedDate) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        entry: { ...data, user: "skrt", entryDate: selectedDate },
+        entry: {
+          ...data,
+          user: "skrt",
+          entryDate: selectedDate,
+        },
       }),
     }).catch((error) => {
       window.alert(error);

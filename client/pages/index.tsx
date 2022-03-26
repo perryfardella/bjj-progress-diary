@@ -33,8 +33,8 @@ const Home: NextPage = () => {
           openTo="day"
           value={selectedDate}
           // shouldDisableDate={isWeekend}
-          onChange={(newDate) => {
-            setSelectedDate(newDate);
+          onChange={(selectedDate) => {
+            setSelectedDate(selectedDate);
           }}
           renderInput={(params) => <TextField {...params} />}
         />

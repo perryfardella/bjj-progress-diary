@@ -5,5 +5,5 @@ export interface Entry {
   createDate: Date;
   updatedDate: Date;
   user: string;
-  id: string;
+  _id: string;
 }
