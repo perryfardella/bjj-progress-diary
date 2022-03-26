@@ -25,8 +25,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      {/* Need to pass a function here as props that will allow us to retrieve the id of the entry to be edited */}
-      <EntryList selectedDate={selectedDate} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker<Date>
           // orientation="landscape"
@@ -39,6 +37,8 @@ const Home: NextPage = () => {
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
+
+      <EntryList selectedDate={selectedDate} />
 
       <Dialog
         onClose={() => setCreateDialogIsOpen(false)}
