@@ -2,12 +2,12 @@ import { LocalizationProvider, StaticDatePicker } from "@mui/lab";
 import { TextField } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
-import RecordList from "../components/entryList";
+import EntryList from "../components/entryList";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import isWeekend from "date-fns/isWeekend";
 import Dialog from "@mui/material/Dialog";
-import Create from "../components/create";
+import Create from "../components/createEntry";
 import Edit from "../components/edit";
+import CreateEntry from "../components/createEntry";
 
 const Home: NextPage = () => {
   // Hook to keep track of the create dialog status
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   return (
     <div>
       {/* Need to pass a function here as props that will allow us to retrieve the id of the entry to be edited */}
-      <RecordList selectedDate={selectedDate} />
+      <EntryList selectedDate={selectedDate} />
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker<Date>
           // orientation="landscape"
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         open={createDialogIsOpen}
       >
         {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
-        <Create />
+        <CreateEntry selectedDate={selectedDate} />
       </Dialog>
 
       <Dialog

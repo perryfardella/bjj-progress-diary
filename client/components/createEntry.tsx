@@ -1,13 +1,17 @@
-import router from "next/router";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+interface createEntryProps {
+  selectedDate: Date | null;
+}
 
 type Inputs = {
   sessionType: "gi" | "no gi";
   entry: string;
+  entryDate: Date;
 };
 
-const Create = () => {
+const CreateEntry: React.FC<createEntryProps> = (selectedDate) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +23,9 @@ const Create = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ entry: { ...data, user: "skrt" } }),
+      body: JSON.stringify({
+        entry: { ...data, user: "skrt", entryDate: selectedDate },
+      }),
     }).catch((error) => {
       window.alert(error);
       return;
@@ -45,4 +51,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateEntry;

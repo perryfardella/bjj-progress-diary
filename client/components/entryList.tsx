@@ -1,4 +1,6 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Entry } from "../types";
 
 interface entryListProps {
   selectedDate: Date | null;
@@ -11,15 +13,15 @@ const Entry = (props: any) => (
     <td>{props.entry.entry}</td>
     <td>
       {/* On click - pass the id of the entry up to our index page so we can display teh correct edit dialog */}
-      <button className="btn btn-link">Edit</button>|
-      <button
-        className="btn btn-link"
+      <Button variant="outlined">Edit</Button>
+      <Button
+        variant="outlined"
         onClick={() => {
           props.deleteEntry(props.entry._id);
         }}
       >
         Delete
-      </button>
+      </Button>
     </td>
   </tr>
 );
@@ -59,14 +61,22 @@ const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
 
   // This method will map out the entries on the table
   const entryList = () => {
-    return entries.map((entry: any) => {
-      return (
-        <Entry
-          entry={entry}
-          deleteEntry={() => deleteEntry(entry._id)}
-          key={entry._id}
-        />
-      );
+    return entries.map((entry: Entry) => {
+      console.log("selected date is: " + selectedDate);
+      console.log(entry);
+      if (
+        entry.entryDate.getDate() === selectedDate?.getDate() &&
+        entry.entryDate.getMonth() === selectedDate?.getMonth() &&
+        entry.entryDate.getFullYear() === selectedDate?.getFullYear()
+      ) {
+        return (
+          <Entry
+            entry={entry}
+            deleteEntry={() => deleteEntry(entry.id)}
+            key={entry.id}
+          />
+        );
+      }
     });
   };
 
