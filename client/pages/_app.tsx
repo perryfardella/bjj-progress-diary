@@ -6,6 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
+import Script from "next/script";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -34,6 +35,7 @@ export default function MyApp(props: MyAppProps) {
           charSet="UTF-8"
         />
         <title>BJJ Progress Journal</title>
+        {/* Enable Tiny-MCE rich text editor */}
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

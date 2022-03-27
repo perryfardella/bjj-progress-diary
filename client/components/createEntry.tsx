@@ -48,7 +48,14 @@ const CreateEntry: React.FC<createEntryProps> = ({ selectedDate }) => {
       </select>
 
       {/* include validation with required or other standard HTML validation rules */}
-      <Editor {...register("entry", { required: true })} />
+      <Editor
+        apiKey={process.env.TINY_MCE_API_KEY}
+        init={{
+          height: 500,
+          menubar: false,
+        }}
+        {...register("entry", { required: true })}
+      />
       {/* errors will return when field validation fails  */}
       {errors.entry && <span>This field is required</span>}
 
