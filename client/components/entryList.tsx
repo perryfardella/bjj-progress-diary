@@ -1,5 +1,5 @@
 import { Button, Dialog } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Entry } from "../types";
 import EditEntry from "./editEntry";
 
@@ -75,10 +75,6 @@ const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
   // This method will map out the entries on the table
   const entryList = () => {
     return entries.map((entry: Entry) => {
-      console.log("selected date is: " + selectedDate);
-      console.log("entry is: " + JSON.stringify(entry));
-      console.log("entry date after ISO convert:" + new Date(entry.entryDate));
-
       // Convert ISO Date string to a Date object
       const entryDate = new Date(entry.entryDate);
       if (

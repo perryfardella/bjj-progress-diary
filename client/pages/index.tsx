@@ -1,5 +1,5 @@
 import { LocalizationProvider, StaticDatePicker } from "@mui/lab";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import type { NextPage } from "next";
 import React from "react";
 import EntryList from "../components/entryList";
@@ -42,9 +42,9 @@ const Home: NextPage = () => {
         <CreateEntry selectedDate={selectedDate} />
       </Dialog>
 
-      <button onClick={() => setCreateDialogIsOpen(true)}>
+      <Button variant="outlined" onClick={() => setCreateDialogIsOpen(true)}>
         create new record
-      </button>
+      </Button>
     </div>
   );
 };
