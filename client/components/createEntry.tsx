@@ -17,6 +17,7 @@ const CreateEntry: React.FC<createEntryProps> = ({ selectedDate }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await fetch("http://localhost:3081/api/entry", {
       method: "POST",

@@ -5,17 +5,11 @@ import React from "react";
 import EntryList from "../components/entryList";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import Dialog from "@mui/material/Dialog";
-import Create from "../components/createEntry";
-import Edit from "../components/edit";
 import CreateEntry from "../components/createEntry";
 
 const Home: NextPage = () => {
   // Hook to keep track of the create dialog status
   const [createDialogIsOpen, setCreateDialogIsOpen] =
-    React.useState<boolean>(false);
-
-  // Hook to keep track of the edit dialog status
-  const [editDialogIsOpen, setEditDialogIsOpen] =
     React.useState<boolean>(false);
 
   // Hook to keep track of the currently selected date
@@ -48,20 +42,8 @@ const Home: NextPage = () => {
         <CreateEntry selectedDate={selectedDate} />
       </Dialog>
 
-      <Dialog
-        onClose={() => setEditDialogIsOpen(false)}
-        open={editDialogIsOpen}
-      >
-        {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
-        <Edit entryId="6239d0b08548d149188270ef" />
-      </Dialog>
-
       <button onClick={() => setCreateDialogIsOpen(true)}>
         create new record
-      </button>
-
-      <button onClick={() => setEditDialogIsOpen(true)}>
-        sample edit record
       </button>
     </div>
   );

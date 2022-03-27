@@ -1,33 +1,46 @@
-import { Button } from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Entry } from "../types";
+import EditEntry from "./editEntry";
 
 interface entryListProps {
   selectedDate: Date | null;
 }
 
-const Entry = (props: any) => (
-  <tr>
-    <td>{props.entry.user}</td>
-    <td>{props.entry.sessionType}</td>
-    <td>{props.entry.entry}</td>
-    <td>
-      {/* On click - pass the id of the entry up to our index page so we can display teh correct edit dialog */}
-      <Button variant="outlined">Edit</Button>
-      <Button
-        variant="outlined"
-        onClick={() => {
-          props.deleteEntry(props.entry._id);
-        }}
-      >
-        Delete
-      </Button>
-    </td>
-  </tr>
-);
-
 const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = React.useState<Entry[]>([]);
+  const [selectedEntry, setSelectedEntry] = React.useState<Entry>();
+
+  // Hook to keep track of the edit dialog status
+  const [editDialogIsOpen, setEditDialogIsOpen] =
+    React.useState<boolean>(false);
+
+  const Entry = (props: any) => (
+    <tr>
+      <td>{props.entry.user}</td>
+      <td>{props.entry.sessionType}</td>
+      <td>{props.entry.entry}</td>
+      <td>
+        {/* On click - pass the id of the entry up to our index page so we can display teh correct edit dialog */}
+        <Button variant="outlined" onClick={() => handleEditClick(props.entry)}>
+          Edit
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            props.deleteEntry(props.entry._id);
+          }}
+        >
+          Delete
+        </Button>
+      </td>
+    </tr>
+  );
+
+  const handleEditClick = (selectedEntry: Entry) => {
+    setSelectedEntry(selectedEntry);
+    setEditDialogIsOpen(true);
+  };
 
   // This method fetches the entries from the database.
   useEffect(() => {
@@ -86,20 +99,32 @@ const EntryList: React.FC<entryListProps> = ({ selectedDate }) => {
 
   // This following section will display the table with the entries of individuals.
   return (
-    <div>
-      <h3>Entry List</h3>
-      <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>SessionType</th>
-            <th>Entry</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{entryList()}</tbody>
-      </table>
-    </div>
+    <>
+      <div>
+        <h3>Entry List</h3>
+        <table className="table table-striped" style={{ marginTop: 20 }}>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>SessionType</th>
+              <th>Entry</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{entryList()}</tbody>
+        </table>
+      </div>
+
+      {selectedEntry && (
+        <Dialog
+          onClose={() => setEditDialogIsOpen(false)}
+          open={editDialogIsOpen}
+        >
+          {/* On submission need to close the dialog, can pass setDialogIsOpen(false) down as a function prop that's called on submission */}
+          <EditEntry entryId={selectedEntry!._id} />
+        </Dialog>
+      )}
+    </>
   );
 };
 
