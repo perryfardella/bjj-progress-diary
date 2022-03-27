@@ -1,5 +1,6 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Editor } from "@tinymce/tinymce-react";
 
 interface createEntryProps {
   selectedDate: Date | null;
@@ -47,7 +48,7 @@ const CreateEntry: React.FC<createEntryProps> = ({ selectedDate }) => {
       </select>
 
       {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("entry", { required: true })} />
+      <Editor {...register("entry", { required: true })} />
       {/* errors will return when field validation fails  */}
       {errors.entry && <span>This field is required</span>}
 
